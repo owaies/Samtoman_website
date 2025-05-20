@@ -3,53 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login - SAIF AL MAMARI</title>
+  <title>Admin Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
-  <div class="login-container">
-    <div class="login-box">
-      <h1>Admin Login</h1>
-      <form id="login-form">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" required>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+  <div class="container">
+    <h1>Admin Login</h1>
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
   </div>
-
-  <script>
-    document.getElementById('login-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      
-      try {
-        const response = await fetch('/admin/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username, password })
-        });
-        
-        if (!response.ok) throw new Error('Login failed');
-        
-        const { token } = await response.json();
-        localStorage.setItem('adminToken', token);
-        window.location.href = '/admin/panel';
-      } catch (error) {
-        console.error('Login error:', error);
-        alert('Invalid credentials. Please try again.');
-      }
-    });
-  </script>
+  <script src="/js/admin.js"></script>
 </body>
 </html>

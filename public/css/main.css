@@ -212,7 +212,7 @@ main {
   margin-bottom: 1rem;
   animation: fadeIn 1.2s ease-out 0.4s;
   animation-fill-mode: both;
-  color : #CDA434;
+   color: #CDA434;
 }
 
 .hero-content p {
@@ -220,15 +220,14 @@ main {
   margin-bottom: 2rem;
   animation: fadeIn 1.2s ease-out 0.6s;
   animation-fill-mode: both;
-  color:#F5E8C7
-
+  color: #F9F6EE;
 }
 
 .hero-content .cta-button {
   display: inline-block;
   padding: 1rem 2rem;
   background: linear-gradient(45deg, #CDA434, #E8B923); /* Rich Gold gradient */
-  color: #000000; /* Deep Teal */
+  color: #0A3D62; /* Deep Teal */
   text-decoration: none;
   border-radius: 6px;
   font-family: 'Playfair Display', serif;
@@ -315,7 +314,6 @@ section {
 .services-grid > * {
   position: relative; /* For overlay positioning */
   padding: 1.5rem;
-  background: url('/images/service-card-bg.jpg') no-repeat center center/cover; /* Background image for each card */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
@@ -509,12 +507,39 @@ section[data-content="contact"] p a:hover {
 
 /* About Section (Index Page) */
 section.about {
+  position: relative; /* For overlay positioning */
   padding: 2rem;
-  background: linear-gradient(135deg, #FFFFFF, #F9F6EE); /* White to Creamy White */
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease-out;
-  
+  overflow: hidden; /* Ensure overlay doesn't overflow */
+}
+
+section.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); /* Dark overlay for readability */
+  z-index: 1;
+  border-radius: 10px;
+}
+
+section.about > * {
+  position: relative;
+  z-index: 2; /* Ensure content is above overlay */
+  color: #F9F6EE; /* Creamy White for better contrast */
+}
+
+section.about h1,
+section.about h2 {
+  color: #F9F6EE; /* Override default Deep Teal for headings */
+}
+
+section.about ul li::before {
+  color: #CDA434; /* Rich Gold for bullet points */
 }
 
 /* Animations */
