@@ -12,9 +12,9 @@ html {
 }
 
 body {
-  background: linear-gradient(135deg, #F5E8C7, #E8DDB5) fixed, /* Soft Sand gradient */
+  background: linear-gradient(135deg, #D3E3F1, #FFFFFF) fixed, /* Light Blue-Gray to White gradient (unchanged) */
               linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.05)); /* Subtle overlay */
-  color: #2E2E2E; /* Charcoal */
+  color: #2E2E2E; /* Dark Gray (unchanged for readability) */
   min-height: 100vh;
   overflow-x: hidden;
   font-family: 'Lora', serif;
@@ -25,7 +25,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #0A3D62, #1B5E91); /* Deep Teal to Lighter Teal */
+  background: linear-gradient(90deg, #E30613, #E30613); /* Red (unchanged) */
   padding: 1.5rem 2rem;
   position: fixed;
   width: 100%;
@@ -44,18 +44,25 @@ body {
 .logo h1 {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
-  color: #CDA434; /* Rich Gold */
+  color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
   text-transform: uppercase;
   animation: fadeIn 1s ease-in;
 }
 
 .logo p {
   font-size: 0.9rem;
-  color: #F9F6EE; /* Creamy White */
+  color: #FFFFFF; /* White (unchanged for contrast) */
   margin-top: 0.3rem;
   animation: fadeIn 1.2s ease-in;
 }
-
+.logo img{
+  border : 2px solid black ;
+  border-radius: 5%;
+}
+.logo img:hover{
+  border : 3px solid black ;
+  border-radius: 10%;
+}
 /* Desktop Navigation */
 .desktop-nav {
   display: block;
@@ -76,7 +83,7 @@ body {
 }
 
 .desktop-nav ul li a {
-  color: #F9F6EE; /* Creamy White */
+  color: #FFFFFF; /* White (unchanged for contrast on red background) */
   text-decoration: none;
   font-size: 1.2rem;
   font-family: 'Playfair Display', serif;
@@ -85,7 +92,7 @@ body {
 }
 
 .desktop-nav ul li a:hover {
-  color: #CDA434; /* Rich Gold */
+  color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
   transform: translateY(-2px);
 }
 
@@ -96,7 +103,7 @@ body {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #CDA434; /* Rich Gold */
+  background-color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
   transition: width 0.3s ease;
 }
 
@@ -112,7 +119,7 @@ body {
   right: 0;
   height: 100vh;
   width: 280px;
-  background: linear-gradient(90deg, #0A3D62, #1B5E91); /* Deep Teal to Lighter Teal */
+  background: linear-gradient(90deg, #E30613, #E30613); /* Red (unchanged) */
   flex-direction: column;
   padding: 2rem;
   transform: translateX(100%);
@@ -136,7 +143,7 @@ body {
 }
 
 .mobile-nav ul li a {
-  color: #F9F6EE; /* Creamy White */
+  color: #FFFFFF; /* White (unchanged for contrast) */
   font-size: 1.4rem;
   font-family: 'Playfair Display', serif;
   text-decoration: none;
@@ -144,14 +151,14 @@ body {
 }
 
 .mobile-nav ul li a:hover {
-  color: #CDA434; /* Rich Gold */
+  color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
 }
 
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
   display: none;
   font-size: 2rem;
-  color: #F9F6EE; /* Creamy White */
+  color: #FFFFFF; /* White (unchanged) */
   background: none;
   border: none;
   cursor: pointer;
@@ -163,7 +170,7 @@ body {
 }
 
 .mobile-menu-toggle:hover {
-  color: #CDA434; /* Rich Gold */
+  color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
   transform: scale(1.1);
 }
 
@@ -193,14 +200,14 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); /* Gradient overlay */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); /* Gradient overlay (unchanged) */
   z-index: 1;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  color: #F9F6EE; /* Creamy White */
+  color: #FFFFFF; /* White (unchanged for contrast) */
   animation: fadeInUp 1s ease-out 0.2s;
   animation-fill-mode: both;
 }
@@ -212,7 +219,7 @@ main {
   margin-bottom: 1rem;
   animation: fadeIn 1.2s ease-out 0.4s;
   animation-fill-mode: both;
-   color: #CDA434;
+  color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
 }
 
 .hero-content p {
@@ -220,14 +227,14 @@ main {
   margin-bottom: 2rem;
   animation: fadeIn 1.2s ease-out 0.6s;
   animation-fill-mode: both;
-  color: #F9F6EE;
+  color: #FFFFFF; /* White (unchanged) */
 }
 
 .hero-content .cta-button {
   display: inline-block;
   padding: 1rem 2rem;
-  background: linear-gradient(45deg, #CDA434, #E8B923); /* Rich Gold gradient */
-  color: #0A3D62; /* Deep Teal */
+  background: linear-gradient(45deg, #1A1A1A, #1A1A1A); /* Changed to Deep Charcoal Black (previously Blue) */
+  color: #FFFFFF; /* White text (unchanged) */
   text-decoration: none;
   border-radius: 6px;
   font-family: 'Playfair Display', serif;
@@ -237,7 +244,8 @@ main {
 }
 
 .hero-content .cta-button:hover {
-  background: linear-gradient(45deg, #F9F6EE, #E8DDB5); /* Creamy White to Soft Sand */
+  background: linear-gradient(45deg, #FFFFFF, #D3E3F1); /* White to Light Blue-Gray (unchanged) */
+  color: #E30613; /* Red (unchanged) */
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -259,7 +267,7 @@ section {
   gap: 2rem;
   margin-bottom: 3rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #FFFFFF, #F9F6EE); /* White to Creamy White */
+  background: linear-gradient(135deg, #FFFFFF, #D3E3F1); /* White to Light Blue-Gray (unchanged) */
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease-out;
@@ -277,7 +285,7 @@ section {
   height: 200px;
   object-fit: cover;
   border-radius: 8px;
-  border: 2px solid #CDA434; /* Rich Gold */
+  border: 2px solid #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -299,7 +307,7 @@ section {
 .services-preview {
   margin-bottom: 4rem;
   padding: 2rem;
-  background: linear-gradient(135deg, #FFFFFF, #F9F6EE); /* White to Creamy White */
+  background: linear-gradient(135deg, #FFFFFF, #D3E3F1); /* White to Light Blue-Gray (unchanged) */
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease-out;
@@ -312,13 +320,13 @@ section {
 }
 
 .services-grid > * {
-  position: relative; /* For overlay positioning */
+  position: relative;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
-  color: #F9F6EE; /* Creamy White for better contrast */
-  overflow: hidden; /* Ensure overlay doesn't overflow */
+  color: #FFFFFF; /* White (unchanged) */
+  overflow: hidden;
 }
 
 .services-grid > *::before {
@@ -328,7 +336,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); /* Dark overlay for readability */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); /* Dark overlay (unchanged) */
   z-index: 1;
   border-radius: 8px;
 }
@@ -336,8 +344,8 @@ section {
 .services-grid > * h3,
 .services-grid > * p {
   position: relative;
-  z-index: 2; /* Ensure text is above overlay */
-  color: #F9F6EE; /* Creamy White */
+  z-index: 2;
+  color: #FFFFFF; /* White (unchanged) */
 }
 
 .services-grid > *:hover {
@@ -356,7 +364,7 @@ section {
   gap: 2rem;
   margin-bottom: 3rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #FFFFFF, #F9F6EE); /* White to Creamy White */
+  background: linear-gradient(135deg, #FFFFFF, #D3E3F1); /* White to Light Blue-Gray (unchanged) */
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease-out;
@@ -380,7 +388,7 @@ section {
   height: 200px;
   object-fit: cover;
   border-radius: 8px;
-  border: 2px solid #CDA434; /* Rich Gold */
+  border: 2px solid #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -419,9 +427,9 @@ section {
 .client-logo {
   width: 150px;
   height: 150px;
-  background: #FFFFFF; /* Solid white background for better logo visibility */
+  background: #FFFFFF; /* White (unchanged) */
   border-radius: 50%;
-  overflow: hidden; /* Ensure any overflow is hidden */
+  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -433,9 +441,9 @@ section {
 .client-logo img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Fill the circle, cropping if necessary */
-  object-position: center; /* Center the image */
-  border-radius: 50%; /* Clip the image to the circle */
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
 }
 
 /* Contact Section (Contact Page) */
@@ -449,7 +457,7 @@ section[data-content="contact"] {
   width: 100%;
   max-width: 1000px;
   padding: 2rem;
-  background: linear-gradient(135deg, #FFFFFF, #F9F6EE); /* White to Creamy White */
+  background: linear-gradient(135deg, #FFFFFF, #D3E3F1); /* White to Light Blue-Gray (unchanged) */
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease-out;
@@ -472,11 +480,13 @@ section[data-content="contact"] {
 .contact-form,
 .contact-location {
   padding: 1.5rem;
-  background: #F9F6EE; /* Creamy White */
+  background: #D3E3F1; /* Light Blue-Gray (unchanged) */
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-
+a {
+  text-decoration: none;
+}
 .contact-form h2,
 .contact-location h2 {
   margin-bottom: 1rem;
@@ -490,29 +500,29 @@ section[data-content="contact"] {
   width: 100%;
   height: 300px;
   border-radius: 8px;
-  border: 2px solid #CDA434; /* Rich Gold */
+  border: 2px solid #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 section[data-content="contact"] p a {
-  color: #0A3D62; /* Deep Teal */
+  color: #E30613; /* Red (unchanged) */
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 section[data-content="contact"] p a:hover {
-  color: #CDA434; /* Rich Gold */
+  color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
 }
 
 /* About Section (Index Page) */
 section.about {
-  position: relative; /* For overlay positioning */
+  position: relative;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease-out;
-  overflow: hidden; /* Ensure overlay doesn't overflow */
+  overflow: hidden;
 }
 
 section.about::before {
@@ -522,24 +532,24 @@ section.about::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); /* Dark overlay for readability */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); /* Dark overlay (unchanged) */
   z-index: 1;
   border-radius: 10px;
 }
 
 section.about > * {
   position: relative;
-  z-index: 2; /* Ensure content is above overlay */
-  color: #F9F6EE; /* Creamy White for better contrast */
+  z-index: 2;
+  color: #FFFFFF; /* White (unchanged) */
 }
 
 section.about h1,
 section.about h2 {
-  color: #F9F6EE; /* Override default Deep Teal for headings */
+  color: #FFFFFF; /* White (unchanged) */
 }
 
 section.about ul li::before {
-  color: #CDA434; /* Rich Gold for bullet points */
+  color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
 }
 
 /* Animations */
@@ -575,7 +585,7 @@ ul li:nth-child(6) { --i: 6; }
 /* Headings and Text */
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
-  color: #0A3D62; /* Deep Teal */
+  color: #E30613; /* Red (unchanged) */
   margin-bottom: 1.2rem;
   text-transform: uppercase;
 }
@@ -583,7 +593,7 @@ h1, h2, h3 {
 p, ul li {
   line-height: 1.8;
   font-size: 1.1rem;
-  color: #2E2E2E; /* Charcoal */
+  color: rgb(32, 32, 32); /* Dark Gray (unchanged) */
 }
 
 ul {
@@ -592,14 +602,14 @@ ul {
 
 ul li::before {
   content: '•';
-  color: #CDA434; /* Rich Gold */
+  color: #303030; /* Changed to Deep Charcoal Black (previously Blue) */
   margin-right: 0.8rem;
 }
 
 /* Footer */
 footer {
-  background: linear-gradient(90deg, #0A3D62, #1B5E91); /* Deep Teal to Lighter Teal */
-  color: #F9F6EE; /* Creamy White */
+  background: linear-gradient(90deg, #E30613, #E30613); /* Red (unchanged) */
+  color: #FFFFFF; /* White (unchanged) */
   text-align: center;
   padding: 1.5rem;
   font-size: 0.95rem;
@@ -615,26 +625,26 @@ form {
 
 input, textarea {
   padding: 1rem;
-  border: 1px solid #0A3D62; /* Deep Teal */
+  border: 1px solid #E30613; /* Red (unchanged) */
   border-radius: 6px;
   background: #FFFFFF;
-  color: #2E2E2E; /* Charcoal */
+  color: #2E2E2E; /* Dark Gray (unchanged) */
   font-family: 'Lora', serif;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus, textarea:focus {
-  border-color: #CDA434; /* Rich Gold */
-  box-shadow: 0 0 8px rgba(205, 164, 52, 0.3);
+  border-color: #1A1A1A; /* Changed to Deep Charcoal Black (previously Blue) */
+  box-shadow: 0 0 8px rgba(26, 26, 26, 0.3); /* Updated shadow to match Deep Charcoal Black */
   outline: none;
 }
 
 button {
   padding: 1rem;
-  background: linear-gradient(45deg, #CDA434, #E8B923); /* Rich Gold gradient */
+  background: linear-gradient(45deg, #1A1A1A, #1A1A1A); /* Changed to Deep Charcoal Black (previously Blue) */
   border: none;
   border-radius: 6px;
-  color: #0A3D62; /* Deep Teal */
+  color: #FFFFFF; /* White (unchanged) */
   cursor: pointer;
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
@@ -642,7 +652,8 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(45deg, #F9F6EE, #E8DDB5); /* Creamy White to Soft Sand */
+  background: linear-gradient(45deg, #FFFFFF, #D3E3F1); /* White to Light Blue-Gray (unchanged) */
+  color: #E30613; /* Red (unchanged) */
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -660,7 +671,7 @@ button:active {
 /* Responsive Design */
 @media (max-width: 768px) {
   html {
-    scroll-padding-top: 4rem; /* Adjusted for smaller header on mobile */
+    scroll-padding-top: 4rem;
   }
 
   .desktop-nav {
