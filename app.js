@@ -1,14 +1,20 @@
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
 const indexRoutes = require('./routes/index');
 const adminRoutes = require('./routes/admin');
 
 const app = express();
 
 // Middleware
-app.use(express.json());A
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+}));
 
 // View engine
 app.set('views', path.join(__dirname, 'views'));

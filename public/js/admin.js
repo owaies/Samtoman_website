@@ -28,31 +28,28 @@ document.getElementById('login-form').addEventListener('submit', async function 
   }
 });
 
+// Handle logout
+document.getElementById('logout-button').addEventListener('click', async () => {
+  await fetch('/admin/logout');
+  document.getElementById('admin-section').style.display = 'none';
+  document.getElementById('login-section').style.display = 'block';
+});
+
 // Handle content form submission
 document.getElementById('content-form').addEventListener('submit', async function (event) {
   event.preventDefault();
 
   const formData = new FormData(this);
-  const data = {
-    home: formData.get('home'),
-    about: formData.get('about'),
-    services: formData.get('services'),
-    products: formData.get('products'),
-    clients: formData.get('clients'),
-    contact: formData.get('contact'),
-    backgroundColor: formData.get('backgroundColor'),
-    backgroundImage: formData.get('backgroundImage') ? formData.get('backgroundImage').name : null, // Only send file name (server handles file upload)
-  };
 
   try {
     const response = await fetch('/admin/save', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: formData, // Send as FormData to handle files
     });
 
     if (response.ok) {
       alert('Changes saved successfully!');
+      window.location.reload(); // Reload to reflect updated content
     } else {
       const error = await response.text();
       alert(error || 'Failed to save changes');

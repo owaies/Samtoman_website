@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 
 // Serve public pages
 router.get('/', (req, res) => res.render('index'));
-router.get('/about', (req, res) => res.render('about'));
+router.get('/about', (req, res) => res.render('#aboutus'));
 router.get('/services', (req, res) => res.render('services'));
 router.get('/products', (req, res) => res.render('products'));
 router.get('/clients', (req, res) => res.render('clients'));

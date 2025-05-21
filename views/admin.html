@@ -22,24 +22,120 @@
     <!-- Admin Panel Section -->
     <div id="admin-section" style="display: none;">
       <h1>Admin Panel</h1>
+      <button id="logout-button">Logout</button>
       <div id="admin-content">
         <h2>Customize Website</h2>
-        <form id="content-form">
-          <h3>Home Content</h3>
-          <textarea id="home-content" name="home" rows="5" placeholder="Home page content"></textarea>
-          <h3>About Content</h3>
-          <textarea id="about-content" name="about" rows="5" placeholder="About page content"></textarea>
-          <h3>Services Content</h3>
-          <textarea id="services-content" name="services" rows="5" placeholder="Services page content"></textarea>
-          <h3>Products Content</h3>
-          <textarea id="products-content" name="products" rows="5" placeholder="Products page content"></textarea>
-          <h3>Clients Content</h3>
-          <textarea id="clients-content" name="clients" rows="5" placeholder="Clients page content"></textarea>
-          <h3>Contact Content</h3>
-          <textarea id="contact-content" name="contact" rows="5" placeholder="Contact page content"></textarea>
-          <h3>Styles</h3>
-          <input type="color" id="background-color" name="backgroundColor" value="#0d1b2a">
+        <form id="content-form" enctype="multipart/form-data">
+          <!-- Home Sections -->
+          <h3>Home Sections</h3>
+          <div id="home-sections">
+            <% content.home.forEach((section, index) => { %>
+              <div class="section-block">
+                <h4>Section <%= index + 1 %></h4>
+                <input type="text" name="home[<%= index %>][heading]" value="<%= section.heading %>" placeholder="Heading">
+                <textarea name="home[<%= index %>][paragraph]" rows="3" placeholder="Paragraph"><%= section.paragraph %></textarea>
+                <input type="file" name="home[<%= index %>][image]" accept="image/*">
+                <% if (section.image) { %>
+                  <p>Current Image: <img src="/images/<%= section.image %>" alt="Current Image" width="100"></p>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+          <button type="button" onclick="addSection('home')">Add Home Section</button>
+
+          <!-- About Sections -->
+          <h3>About Sections</h3>
+          <div id="about-sections">
+            <% content.about.forEach((section, index) => { %>
+              <div class="section-block">
+                <h4>Section <%= index + 1 %></h4>
+                <input type="text" name="about[<%= index %>][heading]" value="<%= section.heading %>" placeholder="Heading">
+                <textarea name="about[<%= index %>][paragraph]" rows="3" placeholder="Paragraph"><%= section.paragraph %></textarea>
+                <input type="file" name="about[<%= index %>][image]" accept="image/*">
+                <% if (section.image) { %>
+                  <p>Current Image: <img src="/images/<%= section.image %>" alt="Current Image" width="100"></p>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+          <button type="button" onclick="addSection('about')">Add About Section</button>
+
+          <!-- Services Sections -->
+          <h3>Services Sections</h3>
+          <div id="services-sections">
+            <% content.services.forEach((section, index) => { %>
+              <div class="section-block">
+                <h4>Section <%= index + 1 %></h4>
+                <input type="text" name="services[<%= index %>][heading]" value="<%= section.heading %>" placeholder="Heading">
+                <textarea name="services[<%= index %>][paragraph]" rows="3" placeholder="Paragraph"><%= section.paragraph %></textarea>
+                <input type="file" name="services[<%= index %>][image]" accept="image/*">
+                <% if (section.image) { %>
+                  <p>Current Image: <img src="/images/<%= section.image %>" alt="Current Image" width="100"></p>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+          <button type="button" onclick="addSection('services')">Add Service Section</button>
+
+          <!-- Products Sections -->
+          <h3>Products Sections</h3>
+          <div id="products-sections">
+            <% content.products.forEach((section, index) => { %>
+              <div class="section-block">
+                <h4>Section <%= index + 1 %></h4>
+                <input type="text" name="products[<%= index %>][heading]" value="<%= section.heading %>" placeholder="Heading">
+                <textarea name="products[<%= index %>][paragraph]" rows="3" placeholder="Paragraph"><%= section.paragraph %></textarea>
+                <input type="file" name="products[<%= index %>][image]" accept="image/*">
+                <% if (section.image) { %>
+                  <p>Current Image: <img src="/images/<%= section.image %>" alt="Current Image" width="100"></p>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+          <button type="button" onclick="addSection('products')">Add Product Section</button>
+
+          <!-- Clients Sections -->
+          <h3>Clients Sections</h3>
+          <div id="clients-sections">
+            <% content.clients.forEach((section, index) => { %>
+              <div class="section-block">
+                <h4>Section <%= index + 1 %></h4>
+                <input type="text" name="clients[<%= index %>][heading]" value="<%= section.heading %>" placeholder="Heading">
+                <textarea name="clients[<%= index %>][paragraph]" rows="3" placeholder="Paragraph"><%= section.paragraph %></textarea>
+                <input type="file" name="clients[<%= index %>][image]" accept="image/*">
+                <% if (section.image) { %>
+                  <p>Current Image: <img src="/images/<%= section.image %>" alt="Current Image" width="100"></p>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+          <button type="button" onclick="addSection('clients')">Add Client Section</button>
+
+          <!-- Contact Sections -->
+          <h3>Contact Sections</h3>
+          <div id="contact-sections">
+            <% content.contact.forEach((section, index) => { %>
+              <div class="section-block">
+                <h4>Section <%= index + 1 %></h4>
+                <input type="text" name="contact[<%= index %>][heading]" value="<%= section.heading %>" placeholder="Heading">
+                <textarea name="contact[<%= index %>][paragraph]" rows="3" placeholder="Paragraph"><%= section.paragraph %></textarea>
+                <input type="file" name="contact[<%= index %>][image]" accept="image/*">
+                <% if (section.image) { %>
+                  <p>Current Image: <img src="/images/<%= section.image %>" alt="Current Image" width="100"></p>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+          <button type="button" onclick="addSection('contact')">Add Contact Section</button>
+
+          <!-- Global Styles -->
+          <h3>Global Styles</h3>
+          <input type="color" id="background-color" name="backgroundColor" value="<%= content.backgroundColor %>">
           <input type="file" id="background-image" name="backgroundImage" accept="image/*">
+          <% if (content.backgroundImage) { %>
+            <p>Current Background Image: <img src="/images/<%= content.backgroundImage %>" alt="Current Background Image" width="100"></p>
+          <% } %>
+
           <button type="submit">Save Changes</button>
         </form>
       </div>
@@ -47,30 +143,20 @@
   </div>
 
   <script>
-    // Basic client-side login handling (replace with server-side authentication in production)
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      // Example: Simple client-side validation (replace with actual authentication)
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      // For demo purposes, assume 'admin'/'password' are valid credentials
-      if (username === 'admin' && password === 'password') {
-        // Hide login section and show admin panel
-        document.getElementById('login-section').style.display = 'none';
-        document.getElementById('admin-section').style.display = 'block';
-      } else {
-        alert('Invalid username or password');
-      }
-    });
-
-    // Handle content form submission (client-side placeholder)
-    document.getElementById('content-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      // Add logic to send form data to the server (e.g., via fetch to an API endpoint)
-      alert('Changes saved successfully! (Placeholder)');
-    });
+    // Function to dynamically add a new section
+    function addSection(page) {
+      const container = document.getElementById(`${page}-sections`);
+      const index = container.children.length;
+      const sectionDiv = document.createElement('div');
+      sectionDiv.className = 'section-block';
+      sectionDiv.innerHTML = `
+        <h4>Section ${index + 1}</h4>
+        <input type="text" name="${page}[${index}][heading]" placeholder="Heading">
+        <textarea name="${page}[${index}][paragraph]" rows="3" placeholder="Paragraph"></textarea>
+        <input type="file" name="${page}[${index}][image]" accept="image/*">
+      `;
+      container.appendChild(sectionDiv);
+    }
   </script>
   <script src="/js/admin.js"></script>
 </body>
