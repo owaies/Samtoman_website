@@ -4,6 +4,12 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+if (!ADMIN_USERNAME || !ADMIN_PASSWORD) {
+  throw new Error('ADMIN_USERNAME and ADMIN_PASSWORD environment variables are required');
+}
+
 // Set up multer for file uploads
 const storage = multer.diskStorage({
   destination: 'public/images/',
@@ -41,7 +47,7 @@ let content = {
 };
 
 // Simple in-memory user for demo (use a database and proper password hashing in production)
-const adminUser = { username: 'admin', password: 'password' }; // Replace with secure credentials
+const adminUser = { username: ADMIN_USERNAME, password: ADMIN_PASSWORD };
 
 // Middleware to check if user is authenticated
 function isAuthenticated(req, res, next) {
