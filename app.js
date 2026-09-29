@@ -41,6 +41,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', service: 'samtoman-website' });
+});
+
 // Routes
 app.use('/', indexRoutes);
 app.use('/', adminRoutes);
