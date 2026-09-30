@@ -32,8 +32,14 @@ router.get('/api/content', async (req, res) => {
 // API to handle contact form submissions
 router.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
+  const cleanName = typeof name === 'string' ? name.trim() : '';
+  const cleanEmail = typeof email === 'string' ? email.trim() : '';
+  const cleanMessage = typeof message === 'string' ? message.trim() : '';
+  if (cleanName.length < 2 || cleanName.length > 100 || cleanEmail.length > 254 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(cleanEmail) || cleanMessage.length < 5 || cleanMessage.length > 5000) {
+    return res.status(400).json({ message: 'Please provide a valid name, email, and message.' });
+  }
   try {
-    await pool.query('INSERT INTO messages (name, email, message) VALUES (?, ?, ?)', [name, email, message]);
+    await pool.query('INSERT INTO messages (name, email, message) VALUES (?, ?, ?)', [cleanName, cleanEmail, cleanMessage]);
     res.json({ message: 'Message saved' });
   } catch (error) {
     console.error(error);
