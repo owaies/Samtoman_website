@@ -17,7 +17,17 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024, files: 20 },
+  fileFilter: (req, file, cb) => {
+    const allowed = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+    if (!allowed.has(file.mimetype)) {
+      return cb(new Error('Only JPEG, PNG, WebP, and GIF images are allowed'));
+    }
+    cb(null, true);
+  },
+});
 
 // In-memory storage for demo purposes (use a database in production)
 let content = {
