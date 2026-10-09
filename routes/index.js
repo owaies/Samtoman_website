@@ -38,7 +38,7 @@ router.post('/api/contact', async (req, res) => {
   const cleanName = typeof name === 'string' ? name.trim() : '';
   const cleanEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
   const cleanMessage = typeof message === 'string' ? message.trim() : '';
-  if (cleanName.length < 2 || cleanName.length > 100 || cleanEmail.length > 254 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(cleanEmail) || cleanMessage.length < 5 || cleanMessage.length > 5000) {
+  if (cleanName.length < 2 || cleanName.length > 100 || cleanEmail.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) || cleanMessage.length < 5 || cleanMessage.length > 5000) {
     return res.status(400).json({ message: 'Please provide a valid name, email, and message.' });
   }
   try {
