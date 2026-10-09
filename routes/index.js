@@ -7,7 +7,10 @@ const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'saif_almamari_db'
+  database: process.env.DB_NAME || 'saif_almamari_db',
+  waitForConnections: true,
+  connectionLimit: Number.parseInt(process.env.DB_CONNECTION_LIMIT || '10', 10),
+  queueLimit: 0
 });
 
 // Serve public pages
