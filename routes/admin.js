@@ -73,14 +73,24 @@ router.get('/admin', (req, res) => {
 });
 
 // Handle login
-router.post('/admin/login', (req, res) => {
+router.post('/admin/login', (req, res, next) => {
   const { username, password } = req.body;
-  if (username === adminUser.username && password === adminUser.password) {
-    req.session.isAuthenticated = true;
-    res.status(200).send('Login successful');
-  } else {
-    res.status(401).send('Invalid username or password');
+  if (username !== adminUser.username || password !== adminUser.password) {
+    return res.status(401).send('Invalid username or password');
   }
+
+  req.session.regenerate((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.session.isAuthenticated = true;
+    req.session.save((saveError) => {
+      if (saveError) {
+        return next(saveError);
+      }
+      res.status(200).send('Login successful');
+    });
+  });
 });
 
 // Handle logout
