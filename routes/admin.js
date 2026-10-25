@@ -21,9 +21,16 @@ const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024, files: 20 },
   fileFilter: (req, file, cb) => {
-    const allowed = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
-    if (!allowed.has(file.mimetype)) {
-      return cb(new Error('Only JPEG, PNG, WebP, and GIF images are allowed'));
+    const allowedExtensions = new Map([
+      ['.jpg', 'image/jpeg'],
+      ['.jpeg', 'image/jpeg'],
+      ['.png', 'image/png'],
+      ['.webp', 'image/webp'],
+      ['.gif', 'image/gif'],
+    ]);
+    const extension = path.extname(file.originalname).toLowerCase();
+    if (allowedExtensions.get(extension) !== file.mimetype) {
+      return cb(new Error('Upload a JPEG, PNG, WebP, or GIF image with a matching file extension'));
     }
     cb(null, true);
   },
