@@ -27,5 +27,5 @@ CREATE TABLE messages (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO admins (username, password) VALUES ('admin', 'admin123');
+-- Configure ADMIN_USERNAME and ADMIN_PASSWORD through the deployment environment; never seed plaintext credentials.
 INSERT INTO content (id) VALUES (1);
