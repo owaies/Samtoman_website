@@ -28,11 +28,18 @@ document.getElementById('login-form').addEventListener('submit', async function 
   }
 });
 
-// Handle logout
+// Handle logout using a state-changing POST request.
 document.getElementById('logout-button').addEventListener('click', async () => {
-  await fetch('/admin/logout');
-  document.getElementById('admin-section').style.display = 'none';
-  document.getElementById('login-section').style.display = 'block';
+  try {
+    const response = await fetch('/admin/logout', { method: 'POST' });
+    if (!response.ok) throw new Error('Logout request failed');
+
+    document.getElementById('admin-section').style.display = 'none';
+    document.getElementById('login-section').style.display = 'block';
+  } catch (error) {
+    console.error('Logout error:', error);
+    alert('Unable to log out. Please try again.');
+  }
 });
 
 // Handle content form submission

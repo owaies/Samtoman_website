@@ -101,9 +101,16 @@ router.post('/admin/login', (req, res, next) => {
 });
 
 // Handle logout
-router.get('/admin/logout', (req, res) => {
-  req.session.destroy();
-  res.redirect('/admin');
+router.post('/admin/logout', (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) return next(err);
+    res.clearCookie('connect.sid', {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    });
+    return res.status(204).end();
+  });
 });
 
 // Handle content save with multiple file uploads
