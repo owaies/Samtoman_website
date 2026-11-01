@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const path = require('path');
+const { createUploadFilename, uploadLimits } = require('../utils/admin-upload');
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
@@ -14,12 +14,12 @@ if (!ADMIN_USERNAME || !ADMIN_PASSWORD) {
 const storage = multer.diskStorage({
   destination: 'public/images/',
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    cb(null, createUploadFilename(file.originalname));
   },
 });
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024, files: 20 },
+  limits: uploadLimits,
   fileFilter: (req, file, cb) => {
     const allowedExtensions = new Map([
       ['.jpg', 'image/jpeg'],
@@ -28,7 +28,7 @@ const upload = multer({
       ['.webp', 'image/webp'],
       ['.gif', 'image/gif'],
     ]);
-    const extension = path.extname(file.originalname).toLowerCase();
+    const extension = require('path').extname(file.originalname).toLowerCase();
     if (allowedExtensions.get(extension) !== file.mimetype) {
       return cb(new Error('Upload a JPEG, PNG, WebP, or GIF image with a matching file extension'));
     }
