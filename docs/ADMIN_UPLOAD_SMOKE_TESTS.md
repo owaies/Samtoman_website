@@ -7,3 +7,5 @@
 5. Submit more than 20 files, more than 100 text fields, or more than 120 total multipart parts and confirm the request is rejected.
 6. Submit a field name longer than 100 characters or a text field larger than 256 KiB and confirm the request is rejected.
 7. Confirm ordinary admin edits with fewer than the configured limits still save successfully.
+8. Upload non-image bytes using a permitted image MIME type and matching extension; confirm the save is rejected and the uploaded files are removed.
+9. Upload valid JPEG, PNG, WebP, and GIF files and confirm their file signatures match the accepted extension before content is saved.
