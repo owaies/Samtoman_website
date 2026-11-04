@@ -7,8 +7,8 @@ test('admin upload filenames are unique and preserve only a lowercase extension'
   const first = createUploadFilename('Campaign.PnG');
   const second = createUploadFilename('Campaign.PnG');
 
-  assert.match(first, /^[0-9a-f-]{36}\\.png$/);
-  assert.match(second, /^[0-9a-f-]{36}\\.png$/);
+  assert.match(first, /^[0-9a-f-]{36}\.png$/);
+  assert.match(second, /^[0-9a-f-]{36}\.png$/);
   assert.notEqual(first, second);
 });
 
