@@ -2,7 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { createUploadFilename, uploadLimits } = require('../utils/admin-upload');
+const fs = require('fs/promises');
+const path = require('path');
+const { createUploadFilename, hasSupportedImageSignature, uploadLimits } = require('../utils/admin-upload');
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
@@ -28,7 +30,7 @@ const upload = multer({
       ['.webp', 'image/webp'],
       ['.gif', 'image/gif'],
     ]);
-    const extension = require('path').extname(file.originalname).toLowerCase();
+    const extension = path.extname(file.originalname).toLowerCase();
     if (allowedExtensions.get(extension) !== file.mimetype) {
       return cb(new Error('Upload a JPEG, PNG, WebP, or GIF image with a matching file extension'));
     }
@@ -113,8 +115,37 @@ router.post('/admin/logout', (req, res, next) => {
   });
 });
 
+async function isValidUploadedImage(file) {
+  const handle = await fs.open(file.path, 'r');
+  try {
+    const header = Buffer.alloc(12);
+    const { bytesRead } = await handle.read(header, 0, header.length, 0);
+    const extension = path.extname(file.originalname).toLowerCase();
+    return hasSupportedImageSignature(header.subarray(0, bytesRead), extension);
+  } finally {
+    await handle.close();
+  }
+}
+
+async function removeUploadedFiles(files) {
+  await Promise.all(files.map((file) => fs.unlink(file.path).catch(() => undefined)));
+}
+
 // Handle content save with multiple file uploads
-router.post('/admin/save', isAuthenticated, upload.any(), (req, res) => {
+router.post('/admin/save', isAuthenticated, upload.any(), async (req, res, next) => {
+  const uploadedFiles = Array.isArray(req.files) ? req.files : [];
+  try {
+    for (const file of uploadedFiles) {
+      if (!(await isValidUploadedImage(file))) {
+        await removeUploadedFiles(uploadedFiles);
+        return res.status(400).send('Uploaded file content must match its image extension.');
+      }
+    }
+  } catch (error) {
+    await removeUploadedFiles(uploadedFiles);
+    return next(error);
+  }
+
   const { home, about, services, products, clients, contact, backgroundColor } = req.body;
 
   // Helper function to process sections
@@ -122,7 +153,7 @@ router.post('/admin/save', isAuthenticated, upload.any(), (req, res) => {
     if (!sections) return content[pageKey]; // If no sections provided, return existing
     const parsedSections = Array.isArray(sections) ? sections : [sections];
     return parsedSections.map((section, index) => {
-      const imageField = req.files.find(file => file.fieldname === `${pageKey}[${index}][image]`);
+      const imageField = uploadedFiles.find(file => file.fieldname === `${pageKey}[${index}][image]`);
       return {
         heading: section.heading || content[pageKey][index]?.heading || '',
         paragraph: section.paragraph || content[pageKey][index]?.paragraph || '',
@@ -140,7 +171,7 @@ router.post('/admin/save', isAuthenticated, upload.any(), (req, res) => {
     clients: processSections(clients, 'clients'),
     contact: processSections(contact, 'contact'),
     backgroundColor: backgroundColor || content.backgroundColor,
-    backgroundImage: req.files.find(file => file.fieldname === 'backgroundImage')?.filename || content.backgroundImage,
+    backgroundImage: uploadedFiles.find(file => file.fieldname === 'backgroundImage')?.filename || content.backgroundImage,
   };
 
   res.status(200).send('Changes saved');
