@@ -4,6 +4,8 @@ const router = express.Router();
 const multer = require('multer');
 const fs = require('fs/promises');
 const path = require('path');
+const { randomBytes } = require('crypto');
+const { isValidCsrfToken } = require('../utils/admin-csrf');
 const { createUploadFilename, hasSupportedImageSignature, uploadLimits } = require('../utils/admin-upload');
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
@@ -76,13 +78,23 @@ function isAuthenticated(req, res, next) {
   res.redirect('/admin');
 }
 
-// Render admin page
+function requireCsrfToken(req, res, next) {
+  if (!isValidCsrfToken(req.session?.csrfToken, req.get('x-csrf-token'))) {
+    return res.status(403).send('Invalid or missing CSRF token');
+  }
+  return next();
+}
+
+// Render admin page with a session-bound CSRF token
 router.get('/admin', (req, res) => {
-  res.render('admin', { content });
+  if (typeof req.session.csrfToken !== 'string') {
+    req.session.csrfToken = randomBytes(32).toString('hex');
+  }
+  res.render('admin', { content, csrfToken: req.session.csrfToken });
 });
 
 // Handle login
-router.post('/admin/login', (req, res, next) => {
+router.post('/admin/login', requireCsrfToken, (req, res, next) => {
   const { username, password } = req.body;
   if (username !== adminUser.username || password !== adminUser.password) {
     return res.status(401).send('Invalid username or password');
@@ -93,17 +105,19 @@ router.post('/admin/login', (req, res, next) => {
       return next(err);
     }
     req.session.isAuthenticated = true;
+    req.session.csrfToken = randomBytes(32).toString('hex');
     req.session.save((saveError) => {
       if (saveError) {
         return next(saveError);
       }
+      res.set('X-CSRF-Token', req.session.csrfToken);
       res.status(200).send('Login successful');
     });
   });
 });
 
 // Handle logout
-router.post('/admin/logout', (req, res, next) => {
+router.post('/admin/logout', requireCsrfToken, (req, res, next) => {
   req.session.destroy((err) => {
     if (err) return next(err);
     res.clearCookie('connect.sid', {
@@ -132,7 +146,7 @@ async function removeUploadedFiles(files) {
 }
 
 // Handle content save with multiple file uploads
-router.post('/admin/save', isAuthenticated, upload.any(), async (req, res, next) => {
+router.post('/admin/save', isAuthenticated, requireCsrfToken, upload.any(), async (req, res, next) => {
   const uploadedFiles = Array.isArray(req.files) ? req.files : [];
   try {
     for (const file of uploadedFiles) {

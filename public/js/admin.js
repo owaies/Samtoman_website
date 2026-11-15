@@ -1,5 +1,10 @@
 // public/js/admin.js
 
+function csrfHeaders(headers = {}) {
+  const token = document.querySelector('meta[name="csrf-token"]')?.content || '';
+  return { ...headers, 'X-CSRF-Token': token };
+}
+
 // Handle login form submission
 document.getElementById('login-form').addEventListener('submit', async function (event) {
   event.preventDefault();
@@ -10,11 +15,16 @@ document.getElementById('login-form').addEventListener('submit', async function 
   try {
     const response = await fetch('/admin/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: csrfHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ username, password }),
     });
 
     if (response.ok) {
+      const rotatedToken = response.headers.get('X-CSRF-Token');
+      if (rotatedToken) {
+        document.querySelector('meta[name="csrf-token"]')?.setAttribute('content', rotatedToken);
+      }
+
       // Hide login section and show admin panel
       document.getElementById('login-section').style.display = 'none';
       document.getElementById('admin-section').style.display = 'block';
@@ -31,11 +41,13 @@ document.getElementById('login-form').addEventListener('submit', async function 
 // Handle logout using a state-changing POST request.
 document.getElementById('logout-button').addEventListener('click', async () => {
   try {
-    const response = await fetch('/admin/logout', { method: 'POST' });
+    const response = await fetch('/admin/logout', {
+      method: 'POST',
+      headers: csrfHeaders(),
+    });
     if (!response.ok) throw new Error('Logout request failed');
 
-    document.getElementById('admin-section').style.display = 'none';
-    document.getElementById('login-section').style.display = 'block';
+    window.location.reload();
   } catch (error) {
     console.error('Logout error:', error);
     alert('Unable to log out. Please try again.');
@@ -51,6 +63,7 @@ document.getElementById('content-form').addEventListener('submit', async functio
   try {
     const response = await fetch('/admin/save', {
       method: 'POST',
+      headers: csrfHeaders(),
       body: formData, // Send as FormData to handle files
     });
 
