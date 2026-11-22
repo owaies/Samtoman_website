@@ -90,7 +90,11 @@ router.get('/admin', (req, res) => {
   if (typeof req.session.csrfToken !== 'string') {
     req.session.csrfToken = randomBytes(32).toString('hex');
   }
-  res.render('admin', { content, csrfToken: req.session.csrfToken });
+  res.render('admin', {
+    content,
+    csrfToken: req.session.csrfToken,
+    isAuthenticated: req.session.isAuthenticated === true,
+  });
 });
 
 // Handle login

@@ -11,7 +11,7 @@
 <body>
   <div class="container">
     <!-- Login Section -->
-    <div id="login-section" style="display: block;">
+    <div id="login-section" style="display: <%= isAuthenticated ? "none" : "block" %>;">
       <h1>Admin Login</h1>
       <form id="login-form">
         <input type="text" id="username" placeholder="Username" required>
@@ -21,7 +21,7 @@
     </div>
 
     <!-- Admin Panel Section -->
-    <div id="admin-section" style="display: none;">
+    <div id="admin-section" style="display: <%= isAuthenticated ? "block" : "none" %>;">
       <h1>Admin Panel</h1>
       <button id="logout-button">Logout</button>
       <div id="admin-content">
