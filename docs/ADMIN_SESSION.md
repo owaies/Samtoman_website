@@ -27,3 +27,5 @@ Do not place CSRF tokens in URLs, log them, or accept them from form fields. Kee
 - Confirm logout and content-save requests include the current token.
 - Confirm missing and incorrect tokens receive HTTP 403 and do not change content or write uploaded files.
 - Confirm session loss returns the user to the login flow.
+- After successful login, reload `/admin` and confirm the authenticated session still renders the admin panel without showing the login form.
+- After logout, reload `/admin` and confirm the login form is shown again.
